@@ -1,0 +1,50 @@
+body {
+  border: 5px solid #5a6275;
+  margin: 70px 150px;
+  padding: 50px;
+}
+h1,
+h2,
+h4,
+p {
+  text-align: center;
+  font-family: "Fira Mono", monospace;
+}
+h4 {
+  color: #5a6275;
+}
+form {
+  position: relative;
+  top: 20px;
+  left: 40px;
+  width: 300px;
+}
+button {
+  position: relative;
+  left: 340px;
+  width: auto;
+  top: -17.5px;
+}
+.card {
+  text-align: center;
+  border: 5px solid #e94363;
+  padding: 20px;
+  margin: 20px auto;
+  font-family: "Fira Mono", monospace;
+}
+.placeholder {
+  font-family: "Fira Mono", monospace;
+}
+#select-unit {
+  text-align: center;
+}
+#clouds,
+#humidity,
+#feeling {
+  text-align: center;
+  font-family: "Fira Mono", monospace;
+  line-height: 0.3;
+}
+.profile {
+  font-family: monospace;
+}
