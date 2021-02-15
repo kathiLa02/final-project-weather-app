@@ -29,10 +29,11 @@ button {
 }
 .card {
   text-align: center;
-  border: 4px solid #e94363;
+  border: 4px solid #eec689;
   padding: 10px;
   margin: 20px auto;
   font-family: "Fira Mono", monospace;
+  background-color: transparent;
 }
 .placeholder {
   font-family: "Fira Mono", monospace;
@@ -49,4 +50,13 @@ button {
 }
 .profile {
   font-family: monospace;
+}
+video {
+  position: fixed;
+  overflow: hidden;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
 }
