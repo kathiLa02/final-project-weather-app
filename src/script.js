@@ -73,14 +73,24 @@ function showTemperature(response) {
   showClouds(response);
 }
 
+function displayForecast(response) {
+  console.log(response.data);
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML;
+  console.log(response.data.list[0]);
+}
+
 function displayCity(event) {
   event.preventDefault();
   let currentCity = document.querySelector("#city-input").value;
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${currentCity}`;
-  let apiKey = "d2d29820d9662bdf3cbb458212a4c7a8";
+  let apiKey = "7a4c012d25c9211da55cf57afddab488";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 let searchCity = document.querySelector("#city-form");
