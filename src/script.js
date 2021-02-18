@@ -15,18 +15,18 @@ let days = [
 ];
 
 let months = [
-  "January",
-  "February",
-  "March",
-  "April",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
   "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec",
 ];
 
 let day = days[now.getDay()];
@@ -39,7 +39,7 @@ if (minutes < 10) {
   minutes = `0${minutes}`;
 }
 
-let formattedDate = `${day}, ${month} ${date}, ${year}, ${hours}:${minutes}`;
+let formattedDate = `${day}, ${month} ${date} ${year}, ${hours}:${minutes}`;
 
 h4.innerHTML = formattedDate;
 
