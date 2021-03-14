@@ -70,7 +70,6 @@ function weatherIcon(response) {
   } else if (iconId === "50d" || iconId === "50n") {
     todayIcon.setAttribute("class", "fas fa-smog");
   }
-  return todayIcon;
 }
 
 function feelsLike(response) {
