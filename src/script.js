@@ -15,18 +15,18 @@ let days = [
 ];
 
 let months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11",
+  "12",
 ];
 
 let day = days[now.getDay()];
@@ -39,7 +39,7 @@ if (minutes < 10) {
   minutes = `0${minutes}`;
 }
 
-let formattedDate = `${day}, ${month} ${date} ${year}, ${hours}:${minutes}`;
+let formattedDate = `${day}, ${date}.${month}.${year}, ${hours}:${minutes}`;
 
 h4.innerHTML = formattedDate;
 
@@ -95,6 +95,7 @@ function showClouds(response) {
 }
 
 function showTemperature(response) {
+  console.log(response.data);
   let temperatureElement = document.querySelector("h2");
   celsiusTemperature = response.data.main.temp;
   temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
@@ -116,7 +117,7 @@ function displayCity(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
 
-  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=metric`;
+  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
