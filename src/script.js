@@ -45,6 +45,34 @@ h4.innerHTML = formattedDate;
 
 // display city + temperature after searching
 
+function weatherIcon(response) {
+  let todayIcon = document.querySelector("#today-icon");
+  let iconId = response.data.weather[0].icon;
+  if (iconId === "01d" || iconId === "01n") {
+    todayIcon.setAttribute("class", "fas fa-sun");
+  } else if (iconId === "02d" || iconId === "02n") {
+    todayIcon.setAttribute("class", "fas fa-cloud-sun");
+  } else if (
+    iconId === "03d" ||
+    iconId === "03n" ||
+    iconId === "04d" ||
+    iconId === "04n"
+  ) {
+    todayIcon.setAttribute("class", "fas fa-cloud");
+  } else if (iconId === "09d" || iconId === "09n") {
+    todayIcon.setAttribute("class", "fas fa-cloud-rain");
+  } else if (iconId === "10d" || iconId === "10n") {
+    todayIcon.setAttribute("class", "fas fa-cloud-showers-heavy");
+  } else if (iconId === "11d" || iconId === "11n") {
+    todayIcon.setAttribute("class", "fas fa-bolt");
+  } else if (iconId === "13d" || iconId === "13n") {
+    todayIcon.setAttribute("class", "far fa-snowflake");
+  } else if (iconId === "50d" || iconId === "50n") {
+    todayIcon.setAttribute("class", "fas fa-smog");
+  }
+  return todayIcon;
+}
+
 function feelsLike(response) {
   let feel = Math.round(response.data.main.feels_like);
   let feeling = document.querySelector("#feeling");
@@ -75,7 +103,6 @@ function showTemperature(response) {
 }
 
 function displayForecast(response) {
-  console.log(response.data);
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML;
   console.log(response.data.list[0]);
