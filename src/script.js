@@ -49,6 +49,7 @@ function feelsLike(response) {
   let feel = Math.round(response.data.main.feels_like);
   let feeling = document.querySelector("#feeling");
   feeling.innerHTML = `Feels like ${feel}°C`;
+  weatherIcon(response);
 }
 
 function showHumidity(response) {
@@ -71,6 +72,8 @@ function showTemperature(response) {
   let h2 = document.querySelector("h2");
   h2.innerHTML = `${temperature}°C`;
   showClouds(response);
+
+  celsiusTemperature = response.data.main.temp;
 }
 
 function displayForecast(response) {
@@ -127,18 +130,25 @@ currentLocation.addEventListener("click", displayLocation);
 
 function convertCelsius(event) {
   event.preventDefault();
-  let temp = document.querySelector("#temperature");
-  temp.innerHTML = "13°C";
+  let temperature = document.querySelector("#temperature");
+  changeToFahrenheit.classList.remove("active");
+  changeToCelsius.classList.add("active");
+  temperature.innerHTML = `${celsiusTemperature}°C`;
 }
-
-let changeToCelsius = document.querySelector("#celsius-link");
-changeToCelsius.addEventListener("click", convertCelsius);
 
 function convertFahrenheit(event) {
   event.preventDefault();
-  let temp = document.querySelector("#temperature");
-  temp.innerHTML = "66°F";
+  let temperature = document.querySelector("#temperature");
+  changeToCelsius.classList.remove("active");
+  changeToFahrenheit.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperature.innerHTML = `${Math.round(fahrenheitTemperature)}°F`;
 }
 
-let changeToFahrenheit = document.querySelector("#fahrenheit-link");
+let celsiusTemperature = null;
+
+let changeToCelsius = document.querySelector("#celsius-button");
+changeToCelsius.addEventListener("click", convertCelsius);
+
+let changeToFahrenheit = document.querySelector("#fahrenheit-button");
 changeToFahrenheit.addEventListener("click", convertFahrenheit);
