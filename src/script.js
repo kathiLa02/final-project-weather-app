@@ -68,12 +68,10 @@ function showClouds(response) {
 }
 
 function showTemperature(response) {
-  let temperature = Math.round(response.data.main.temp);
-  let h2 = document.querySelector("h2");
-  h2.innerHTML = `${temperature}°C`;
-  showClouds(response);
-
+  let temperatureElement = document.querySelector("h2");
   celsiusTemperature = response.data.main.temp;
+  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
+  showClouds(response);
 }
 
 function displayForecast(response) {
@@ -131,16 +129,12 @@ currentLocation.addEventListener("click", displayLocation);
 function convertCelsius(event) {
   event.preventDefault();
   let temperature = document.querySelector("#temperature");
-  changeToFahrenheit.classList.remove("active");
-  changeToCelsius.classList.add("active");
-  temperature.innerHTML = `${celsiusTemperature}°C`;
+  temperature.innerHTML = `${Math.round(celsiusTemperature)}°C`;
 }
 
 function convertFahrenheit(event) {
   event.preventDefault();
   let temperature = document.querySelector("#temperature");
-  changeToCelsius.classList.remove("active");
-  changeToFahrenheit.classList.add("active");
   let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
   temperature.innerHTML = `${Math.round(fahrenheitTemperature)}°F`;
 }
