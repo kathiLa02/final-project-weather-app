@@ -73,7 +73,7 @@ function weatherIcon(response) {
 }
 
 function feelsLike(response) {
-  let feel = Math.round(response.data.main.feels_like);
+  feel = Math.round(response.data.main.feels_like);
   let feeling = document.querySelector("#feeling");
   feeling.innerHTML = `Feels like ${feel}°C`;
   weatherIcon(response);
@@ -104,21 +104,37 @@ function showTemperature(response) {
 
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML;
-  console.log(response.data.list[0]);
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 42; index += 7) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+      <div>    
+        <span id="forecast-day">${formatDate(forecast.dt * 1000)}</span>
+        <img 
+          src="http://openweathermap.org/img/wn/${
+            forecast.weather[0].icon
+          }@2x.png"
+          id="forecast-icon"
+          alt="weather icon"> 
+        <span id="forecast-temp">${Math.round(forecast.main.temp)}°</span>
+      </div>
+        `;
+  }
 }
 
 function displayCity(event) {
   event.preventDefault();
   let currentCity = document.querySelector("#city-input").value;
-  let h1 = document.querySelector("h1");
+  let h1 = document.querySelector("#city");
   h1.innerHTML = `${currentCity}`;
   let apiKey = "7a4c012d25c9211da55cf57afddab488";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
 
-  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrlForecast).then(displayForecast);
 }
 
 let searchCity = document.querySelector("#city-form");
@@ -157,6 +173,9 @@ function convertCelsius(event) {
   event.preventDefault();
   let temperature = document.querySelector("#temperature");
   temperature.innerHTML = `${Math.round(celsiusTemperature)}°C`;
+
+  let feelingTemperature = document.querySelector("#feeling");
+  feelingTemperature.innerHTML = `Feels like ${Math.round(feel)}°C`;
 }
 
 function convertFahrenheit(event) {
@@ -164,9 +183,16 @@ function convertFahrenheit(event) {
   let temperature = document.querySelector("#temperature");
   let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
   temperature.innerHTML = `${Math.round(fahrenheitTemperature)}°F`;
+
+  let feelingTemperature = document.querySelector("#feeling");
+  let fahrenheitFeelTemperature = (feel * 9) / 5 + 32;
+  feelingTemperature.innerHTML = `Feels like ${Math.round(
+    fahrenheitFeelTemperature
+  )}°F`;
 }
 
 let celsiusTemperature = null;
+let feel = null;
 
 let changeToCelsius = document.querySelector("#celsius-button");
 changeToCelsius.addEventListener("click", convertCelsius);
